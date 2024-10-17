@@ -1,0 +1,189 @@
+<div class="breadcrumb">
+    <h1>Pharmacy</h1>
+    <ul>
+        <li><a href="">Dashboard</a></li>
+        <li>Pharmacy Details</li>
+    </ul>
+</div>
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-6">
+            <div class="card-body">
+                <div class="card-title m-0">Medicine List</div>
+                <div class="separator-breadcrumb border-top"></div>
+
+                <!-- Scrollable Container -->
+                <div style="max-height: 745px; overflow-y: auto; padding-right: 15px;"> <!-- Fixed height for scrolling -->
+
+                    <!-- First Row -->
+                    <h4>Medicine</h4>
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let medicine of medicines">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Newspaper"></i>
+                                    <p class="text-muted mt-2 mb-2">{{ medicine.name }}</p>
+                                    <button type="button" class="btn btn-outline-primary m-1" (click)="openModal(productModalContent, medicine)">₹{{ medicine.price }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Row -->
+                    <h4>Injections</h4>
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let inject of injections">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Newspaper"></i>
+                                    <p class="text-muted mt-2 mb-2">{{ inject.name }}</p>
+                                    <button type="button" class="btn btn-outline-primary m-1" (click)="openModal(productModalContent, inject)">₹{{ inject.price }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third Row -->
+                    <h4>Syrups</h4>
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let syrupt of Syrupts">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Newspaper"></i>
+                                    <p class="text-muted mt-2 mb-2">{{ syrupt.name }}</p>
+                                    <button type="button" class="btn btn-outline-primary m-1" (click)="openModal(productModalContent, syrupt)">₹{{ syrupt.price }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fourth Row -->
+                    <h4>Pain Reliefs</h4>
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let PainRelief of PainReliefs">
+                            <div class="card card-icon mb-4">
+                                <div class="card-body text-center">
+                                    <i class="i-Newspaper"></i>
+                                    <p class="text-muted mt-2 mb-2">{{ PainRelief.name }}</p>
+                                    <button type="button" class="btn btn-outline-primary m-1" (click)="openModal(productModalContent, PainRelief)">₹{{ PainRelief.price }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End of Scrollable Container -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Template -->
+    <ng-template #productModalContent let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">{{ selectedProduct?.name }}</h4>
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Price: ₹{{ selectedProduct?.price }}</p>
+            <p>Code: {{ selectedProduct?.code }}</p>
+            <div class="form-group d-flex align-items-center">
+                <label for="quantity" class="mr-2">Quantity:</label>
+                <input type="number" class="form-control custom-input" #quantityInput />
+            </div>           
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+            <button type="button" class="btn btn-primary" (click)="addToCart(quantityInput.value); modal.close()">Add to Cart</button>
+        </div>
+    </ng-template>
+
+    <!-- Invoice Bill Section -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title">Invoice Bill</div>
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <div class="card o-hidden">
+                            <ngx-datatable 
+                                [rows]="cartItems"
+                                style="height: 600px; box-shadow: none;"
+                                class="material fullscreen"
+                                [columnMode]="'force'"
+                                [headerHeight]="50"
+                                [footerHeight]="50"
+                                [rowHeight]="60"
+                                [scrollbarV]="true"
+                                [limit]="10">
+
+                                <ngx-datatable-column name="name">
+                                    <ng-template ngx-datatable-header-template>
+                                        NAME
+                                    </ng-template>
+                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                        {{ row.name }}
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column name="quantity">
+                                    <ng-template ngx-datatable-header-template>
+                                        QUANTITY
+                                    </ng-template>
+                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                        {{ row.quantity }}
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column name="price">
+                                    <ng-template ngx-datatable-header-template>
+                                        PRICE
+                                    </ng-template>
+                                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                                        {{ row.price }}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center">
+                                <button type="button" class="btn btn-outline-primary m-1">Cash</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center">
+                                <button type="button" class="btn btn-outline-primary m-1">Card</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center">
+                                <button type="button" class="btn btn-outline-primary m-1">G-pay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card card-icon mb-4">
+                            <div class="card-body text-center">
+                                <button type="button" class="btn btn-outline-success m-1">Received</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
