@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// declare var bootstrap: any; // Ensure Bootstrap is globally available
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-demo',
@@ -93,13 +93,32 @@ export class DemoComponent implements OnInit {
       code: "PRE003"
     }
   ];
-
+// row data
+  // public rows = [];
+  // public columns = [
+  //   { name: "ID", prop: "ID" },
+  //   { name: "MedicineName", prop: "MedicineName" },
+  //   { name: "MedicineQuantity", prop: "MedicineQuantity" },
+  //   { name: "MedicinePrice", prop: "MedicinePrice" }
+  // ];
   selectedProduct: any = null;
   QuantityValue: number
   cartItems: any[] = [];
+  indexvalues: any[] = [];
+  selectedOrder: any = null; // To hold the selected order details
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    
+    // this.rows = map((order, index) => ({
+    //   ID: index + 1,
+    //   MedicineName: order["mediname"],
+    //   MedicineQuantity: order["MediQuanti"],
+    //   MedicinePrice: order["MediPrice"],
+    // }));
+
+    // this.indexvalues = response['report']; // Populate indexvalues for order selection
+  
   }
 
   openModal(content: any, product: any) {
@@ -108,15 +127,16 @@ export class DemoComponent implements OnInit {
   }
 
   addToCart(quantity: number) {
-    this.QuantityValue = quantity;
     const cartItem = {
-      price: this.selectedProduct.price,
-      quantity: this.QuantityValue,
+      id: this.cartItems.length + 1,  // Incremental ID for each cart item
       name: this.selectedProduct.name,
+      quantity: quantity,
+      price: this.selectedProduct.price,
+      total: this.selectedProduct.price * quantity,
       code: this.selectedProduct.code
     };
-    this.cartItems.push(cartItem); 
-    console.log(this.cartItems);
-   
+    this.cartItems.push(cartItem);  // Add the item to the cart
+    console.log(this.cartItems);  // Check the cart in the console
   }
 }
+
