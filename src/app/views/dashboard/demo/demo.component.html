@@ -114,24 +114,9 @@
                 <div class="row">
                     <div class="col-md-12 mb-4">
                         <div class="card o-hidden">
-                            <ngx-datatable 
-                                style="height: 600px; box-shadow: none;"
-                                class="bootstrap core-bootstrap"
-                                [columnMode]="'force'"
-                                [headerHeight]="50"
-                                [footerHeight]="50"
-                                rowHeight="auto" 
-                                [rows]="cartItems"  
-                                [scrollbarV]="true"
-                                [limit]="10">
-
-                                <ngx-datatable-column name="#" prop="id" [width]="10">
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <span>
-                                            <strong>#{{ row.id }}</strong>
-                                        </span>
-                                    </ng-template>
-                                </ngx-datatable-column>
+                            <ngx-datatable style="height: 600px; box-shadow: none;" class="bootstrap core-bootstrap"
+                                [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                [rows]="cartItems" [scrollbarV]="true" [limit]="10">
 
                                 <ngx-datatable-column name="Product Name" prop="name">
                                     <ng-template let-row="row" ngx-datatable-cell-template>
@@ -165,6 +150,7 @@
                                     </ng-template>
                                 </ngx-datatable-column>
                             </ngx-datatable>
+
                         </div>
                     </div>
                 </div>
@@ -207,4 +193,3 @@
     </div>
 
 </div>
-

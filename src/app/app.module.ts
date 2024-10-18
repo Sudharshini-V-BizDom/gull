@@ -9,6 +9,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './shared/inmemory-db/inmemory-db.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'; // Correct import path
 // import { DemoComponent } from './views/dashboard/demo/demo.component';
 
 @NgModule({
@@ -24,8 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     AppRoutingModule,
-    NgbModule
-
+    NgbModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

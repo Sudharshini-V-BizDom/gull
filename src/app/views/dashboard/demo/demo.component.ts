@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-demo',
@@ -106,7 +106,7 @@ export class DemoComponent implements OnInit {
   cartItems: any[] = [];
   indexvalues: any[] = [];
   selectedOrder: any = null; // To hold the selected order details
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     
@@ -118,7 +118,13 @@ export class DemoComponent implements OnInit {
     // }));
 
     // this.indexvalues = response['report']; // Populate indexvalues for order selection
-  
+    // this.cartItems.push({
+    //   id: 1,
+    //   name: 'Test Medicine',
+    //   quantity: 2,
+    //   price: 150,
+    //   total: 300
+    // });
   }
 
   openModal(content: any, product: any) {
@@ -136,6 +142,7 @@ export class DemoComponent implements OnInit {
       code: this.selectedProduct.code
     };
     this.cartItems.push(cartItem);  // Add the item to the cart
+    this.cd.detectChanges(); // Ensure the view updates
     console.log(this.cartItems);  // Check the cart in the console
   }
 }
