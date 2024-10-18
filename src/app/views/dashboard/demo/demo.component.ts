@@ -93,14 +93,14 @@ export class DemoComponent implements OnInit {
       code: "PRE003"
     }
   ];
-// row data
-  // public rows = [];
-  // public columns = [
-  //   { name: "ID", prop: "ID" },
-  //   { name: "MedicineName", prop: "MedicineName" },
-  //   { name: "MedicineQuantity", prop: "MedicineQuantity" },
-  //   { name: "MedicinePrice", prop: "MedicinePrice" }
-  // ];
+
+  public rows = [];
+  public columns = [
+    { name: "ID", prop: "ID" },
+    { name: "MedicineName", prop: "MedicineName" },
+    { name: "MedicineQuantity", prop: "MedicineQuantity" },
+    { name: "MedicinePrice", prop: "MedicinePrice" }
+  ];
   selectedProduct: any = null;
   QuantityValue: number
   cartItems: any[] = [];
