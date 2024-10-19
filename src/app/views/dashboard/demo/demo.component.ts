@@ -144,6 +144,7 @@ export class DemoComponent implements OnInit {
     this.cartItems.push(cartItem);  // Add the item to the cart
     this.cd.detectChanges(); // Ensure the view updates
     console.log(this.cartItems);  // Check the cart in the console
+    //make payment
   }
 }
 
